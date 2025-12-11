@@ -29,6 +29,7 @@ function tuning_mania_scripts() {
 	wp_enqueue_style( 'tuning-mania-style', get_stylesheet_uri(), array(), '1.0.0' );
 
 	// Google Fonts (Orbitron for headers, Inter for body)
+	// Ensure display=swap is present
 	wp_enqueue_style( 'tuning-mania-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap', array(), null );
 
     // Alpine.js (for interactions)
@@ -39,6 +40,7 @@ function tuning_mania_scripts() {
 
     // Hero Dynamic Logic (CSS-based background, no Three.js)
     if ( is_front_page() ) {
+        // Optimize: Only load heavy GSAP on desktop if possible, or keep minimal
         wp_enqueue_script( 'hero-dynamic-js', get_template_directory_uri() . '/assets/js/hero-dynamic.js', array('gsap-js'), '2.0.0', true );
         wp_enqueue_style( 'hero-dynamic-css', get_template_directory_uri() . '/assets/css/hero-3d.css', array(), '2.0.0' );
     }
@@ -73,8 +75,9 @@ add_action( 'wp_enqueue_scripts', 'tuning_mania_scripts' );
  * Add 'defer' attribute to specific scripts (Performance)
  */
 function tuning_mania_add_defer_attribute($tag, $handle) {
-    // Scripts to defer
-    $defer_scripts = array('alpine-js', 'google-recaptcha');
+    // Scripts to defer - jQuery is typically render blocking, deferring it improves Mobile Score
+    // WARNING: Verify no inline jQuery scripts exist before deferring
+    $defer_scripts = array('alpine-js', 'google-recaptcha', 'jquery-core', 'jquery-migrate', 'ctr-search-fix');
 
     if ( in_array($handle, $defer_scripts) ) {
         return str_replace( ' src', ' defer src', $tag );
@@ -491,12 +494,22 @@ add_filter( 'template_include', function( $template ) {
 function tuning_mania_preload_lcp() {
     if ( is_front_page() ) {
         // Preload the responsive Hero Image using imagesrcset
-        // This matches the img tag in front-page.php
+        // This matches the background CSS image in front-page.php (Layer 4) if strictly needed,
+        // BUT for Mobile LCP, it's usually the Static Fallback Image we just added.
+
+        // Preload the fallback WebP for Mobile
+        echo '<link rel="preload" as="image"
+              href="' . get_template_directory_uri() . '/assets/img/hero-supercar.webp"
+              media="(max-width: 767px)"
+              fetchpriority="high">';
+
+        // Preload Desktop Background (Unsplash) - Lower priority on mobile
         echo '<link rel="preload" as="image"
               imagesrcset="https://images.unsplash.com/photo-1617788138017-80ad40651399?fm=webp&q=60&w=480&auto=format&fit=crop 480w,
                            https://images.unsplash.com/photo-1617788138017-80ad40651399?fm=webp&q=70&w=768&auto=format&fit=crop 768w,
                            https://images.unsplash.com/photo-1617788138017-80ad40651399?fm=webp&q=75&w=1920&auto=format&fit=crop 1920w"
               imagesizes="(max-width: 600px) 480px, (max-width: 900px) 768px, 100vw"
+              media="(min-width: 768px)"
               fetchpriority="high">';
     }
 }

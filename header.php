@@ -42,6 +42,7 @@
     <!-- CRITICAL CSS (LCP & Layout Stability) -->
     <style>
         /* Global Reset & Base */
+        /* font-display: swap is handled in functions.php enqueue, but ensuring fallbacks here */
         body { margin: 0; padding: 0; background-color: #0D0D0D; color: white; font-family: sans-serif; }
         .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-smoothing: grayscale; }
 

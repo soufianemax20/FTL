@@ -103,13 +103,23 @@ get_header();
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: 3D RPM Gauge (Restored) -->
+            <!-- RIGHT COLUMN: 3D RPM Gauge (Desktop Only - Performance Optimized) -->
             <div class="hero-card-col w-full md:w-[600px] flex justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
-                <!-- 3D Gauge Container -->
-                <div id="gauge-container" class="w-full h-[450px] mt-4 relative z-50">
+                <!-- 3D Gauge Container (Desktop) -->
+                <div id="gauge-container" class="hidden md:block w-full h-[450px] mt-4 relative z-50">
                     <div id="gauge-loading" class="absolute inset-0 flex items-center justify-center text-white text-xs uppercase tracking-widest font-bold">
-                        Using 3D Engine...
+                        Initializing Engine...
                     </div>
+                </div>
+
+                <!-- Static Image Fallback (Mobile) -->
+                <div class="md:hidden w-full h-[300px] mt-8 relative z-50 flex items-center justify-center">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hero-supercar.webp"
+                         alt="High Performance Tuning"
+                         class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(204,255,0,0.3)]"
+                         loading="eager"
+                         width="300"
+                         height="200">
                 </div>
             </div>
         </div>
@@ -119,7 +129,7 @@ get_header();
 
     </section>
 
-    <!-- 3D Gauge Dependencies (Import Map) -->
+    <!-- 3D Gauge Dependencies (Import Map) - Desktop Only via JS Check -->
     <script type="importmap">
         {
             "imports": {
@@ -129,8 +139,15 @@ get_header();
         }
     </script>
 
-    <!-- 3D Gauge Script -->
-    <script type="module" src="<?php echo get_template_directory_uri(); ?>/assets/js/gauge-3d.js?ver=<?php echo time(); ?>"></script>
+    <!-- 3D Gauge Script - Load only if width > 768px -->
+    <script>
+        if (window.innerWidth >= 768) {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = '<?php echo get_template_directory_uri(); ?>/assets/js/gauge-3d.js?ver=<?php echo time(); ?>';
+            document.body.appendChild(script);
+        }
+    </script>
 
     <!-- FIND YOUR RIDE (Categories) -->
     <section id="selector" class="py-12 md:py-24 bg-neutral-950 border-t border-white/5 relative z-20">

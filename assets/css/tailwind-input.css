@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   TUNING MANIA - CUSTOM TAILWIND COMPONENTS
+   ============================================ */
+
+@layer base {
+
+  /* Smooth Scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Reset & Base */
+  body {
+    @apply bg-dark-900 text-white antialiased overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Selection Style */
+  ::selection {
+    @apply bg-neon-lime text-black;
+  }
+}
+
+@layer components {
+
+  /* ============================================
+     GLASSMORPHISM CARDS
+     ============================================ */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-neon-lime/50 bg-neon-lime/10;
+    box-shadow: 0 0 30px rgba(215, 242, 7, 0.15);
+  }
+
+  /* ============================================
+     NEON BUTTONS
+     ============================================ */
+  .btn-neon {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3;
+    @apply font-bold uppercase tracking-wider text-sm;
+    @apply bg-neon-lime text-black rounded-xl;
+    @apply transition-all duration-300;
+    box-shadow: 0 0 20px rgba(215, 242, 7, 0.3);
+  }
+
+  .btn-neon:hover {
+    @apply scale-105;
+    box-shadow: 0 0 40px rgba(215, 242, 7, 0.5);
+  }
+
+  .btn-outline-neon {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3;
+    @apply font-bold uppercase tracking-wider text-sm;
+    @apply bg-transparent text-neon-lime border-2 border-neon-lime rounded-xl;
+    @apply transition-all duration-300;
+  }
+
+  .btn-outline-neon:hover {
+    @apply bg-neon-lime text-black;
+  }
+
+  /* Lamborghini Premium Button */
+  .btn-lambo {
+    @apply relative inline-flex items-center justify-center gap-3 px-8 py-4;
+    @apply font-black uppercase tracking-widest text-sm;
+    @apply bg-gradient-to-r from-neon-lime via-[#F2EA79] to-neon-green text-black;
+    @apply rounded-xl overflow-hidden;
+    @apply transition-all duration-300;
+    box-shadow: 0 0 30px rgba(215, 242, 7, 0.35);
+  }
+
+  .btn-lambo:hover {
+    @apply scale-105;
+    box-shadow: 0 0 50px rgba(215, 242, 7, 0.6);
+  }
+
+  .btn-lambo::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: opacity 0.3s;
+  }
+
+  .btn-lambo:hover::before {
+    @apply opacity-100;
+    animation: shine 0.6s ease-out;
+  }
+
+  /* ============================================
+     NAVIGATION
+     ============================================ */
+  .nav-link {
+    @apply text-sm font-bold uppercase tracking-widest;
+    @apply text-gray-300 transition-colors duration-300;
+  }
+
+  .nav-link:hover {
+    @apply text-neon-green;
+  }
+
+  .nav-link-active {
+    @apply text-neon-lime;
+  }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .site-header {
+    @apply fixed w-full top-0 left-0 z-50;
+    @apply bg-black/70 backdrop-blur-md;
+    @apply transition-all duration-300;
+    height: 80px;
+  }
+
+  .glass-header-bg {
+    @apply bg-black/50 backdrop-blur-md;
+  }
+
+  /* ============================================
+     HERO SECTION
+     ============================================ */
+  .hero-section {
+    @apply relative min-h-screen flex items-center overflow-hidden;
+    @apply bg-black;
+    padding-top: 80px;
+  }
+
+  .hero-content {
+    @apply relative z-10 flex flex-col justify-center;
+    @apply px-6 w-full h-full;
+  }
+
+  .hero-title {
+    @apply font-orbitron font-black uppercase italic leading-none;
+    @apply text-center mb-8 mt-4;
+  }
+
+  .hero-subtitle {
+    @apply text-gray-300 text-lg text-center mx-auto;
+    @apply max-w-2xl mb-10 font-light leading-relaxed;
+  }
+
+  /* ============================================
+     PRELOADER
+     ============================================ */
+  #site-preloader {
+    @apply fixed inset-0 z-[2147483647];
+    @apply bg-dark-900 flex items-center justify-center;
+    @apply transition-opacity duration-500;
+  }
+
+  .preloader-hidden {
+    @apply opacity-0 pointer-events-none;
+  }
+
+  .spinner-ring {
+    @apply w-[70px] h-[70px] border-[3px] rounded-full;
+    border-color: rgba(255, 255, 255, 0.05);
+    border-top-color: theme('colors.neon.lime');
+    border-right-color: rgba(215, 242, 7, 0.3);
+    animation: spin 0.8s linear infinite;
+    box-shadow: 0 0 15px rgba(215, 242, 7, 0.1);
+  }
+
+  .loading-text {
+    @apply font-orbitron tracking-[0.3em] text-xs text-gray-500 uppercase mt-4;
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+
+  /* Neon Text Glow */
+  .text-glow-lime {
+    text-shadow: 0 0 10px rgba(215, 242, 7, 0.5);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px rgba(242, 234, 121, 0.5);
+  }
+
+  /* Box Shadows */
+  .shadow-neon-lime {
+    box-shadow: 0 0 30px rgba(215, 242, 7, 0.3);
+  }
+
+  .shadow-neon-green {
+    box-shadow: 0 0 30px rgba(242, 234, 121, 0.3);
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}

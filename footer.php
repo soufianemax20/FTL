@@ -47,7 +47,7 @@
                     <ul class="space-y-3 flex flex-col items-center md:items-start">
                         <li><a href="<?php echo home_url('/fileservice/'); ?>" class="text-gray-400 hover:text-[#D7F207] transition-colors text-sm">Fileservice</a></li>
                         <li><a href="<?php echo home_url('/contact/'); ?>" class="text-gray-400 hover:text-[#D7F207] transition-colors text-sm">Contact Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-[#D7F207] transition-colors text-sm">FAQ</a></li>
+                        <li><a href="<?php echo home_url('/sitemap/'); ?>" class="text-gray-400 hover:text-[#D7F207] transition-colors text-sm">Sitemap</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-[#D7F207] transition-colors text-sm">Privacy Policy</a></li>
                     </ul>
                 </div>

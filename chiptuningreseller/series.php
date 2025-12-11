@@ -49,7 +49,7 @@ $theme_uri = get_template_directory_uri();
 
         <!-- Grid -->
         <?php if (!empty($the_series)) : ?>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
             <?php foreach($the_series as $item) {
                 // Real Image Logic - Robust Check
                 $site_icon_url = $theme_uri . '/assets/img/favicon.png';

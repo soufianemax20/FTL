@@ -329,8 +329,8 @@ $vehicle_types = [
 @media (max-width: 640px) {
     .tm-plugin-output select,
     .tm-plugin-output .select2-container--default .select2-selection--single {
-        height: 50px !important;
-        font-size: 0.9rem !important;
+        height: 60px !important; /* Keep large target */
+        font-size: 16px !important; /* Prevent iOS Zoom */
     }
 }
 

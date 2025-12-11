@@ -103,11 +103,51 @@ get_header();
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: 3D RPM Gauge (Desktop Only - Performance Optimized) -->
+            <!-- RIGHT COLUMN: 3D Tuning Visualizer (Desktop Only - Performance Optimized) -->
             <div class="hero-card-col w-full md:w-[600px] flex justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
-                <!-- 3D Gauge Container (Desktop) -->
-                <div id="gauge-container" class="hidden md:block w-full h-[450px] mt-4 relative z-50">
-                    <div id="gauge-loading" class="absolute inset-0 flex items-center justify-center text-white text-xs uppercase tracking-widest font-bold">
+                <!-- 3D Visualizer Container (Desktop) -->
+                <div class="hidden md:block w-full h-[500px] mt-4 relative z-50 group">
+                    <!-- 3D Canvas -->
+                    <div id="tuning-visualizer-canvas" class="w-full h-full"></div>
+
+                    <!-- UI Overlay (Interactive Game Mode) -->
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] bg-black/60 backdrop-blur-md rounded-t-xl p-5 border border-white/10 border-b-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest font-mono">Tuning Simulation</span>
+                            <span id="tuning-stage-label" class="text-neon-yellow font-black uppercase italic">Stock</span>
+                        </div>
+
+                        <!-- Range Slider -->
+                        <div class="relative w-full h-6 flex items-center">
+                            <input type="range" id="tuning-stage-slider" min="0" max="3" value="0" step="1"
+                                   class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-neon-yellow z-10 focus:outline-none">
+                            <div class="absolute inset-0 flex justify-between px-1 pointer-events-none">
+                                <div class="w-0.5 h-2 bg-gray-600 mt-2"></div>
+                                <div class="w-0.5 h-2 bg-gray-600 mt-2"></div>
+                                <div class="w-0.5 h-2 bg-gray-600 mt-2"></div>
+                                <div class="w-0.5 h-2 bg-gray-600 mt-2"></div>
+                            </div>
+                        </div>
+
+                        <!-- Live Stats Bars -->
+                        <div class="grid grid-cols-3 gap-4 mt-4 text-[9px] text-gray-500 uppercase font-bold tracking-wider">
+                            <div>
+                                <div class="mb-1 flex justify-between"><span>Power</span></div>
+                                <div class="h-1 bg-gray-800 rounded-full overflow-hidden shadow-inner"><div id="sim-power-bar" class="h-full bg-blue-500 w-[60%] transition-all duration-500 shadow-[0_0_10px_currentColor]"></div></div>
+                            </div>
+                            <div>
+                                <div class="mb-1 flex justify-between"><span>Torque</span></div>
+                                <div class="h-1 bg-gray-800 rounded-full overflow-hidden shadow-inner"><div id="sim-torque-bar" class="h-full bg-blue-500 w-[55%] transition-all duration-500 shadow-[0_0_10px_currentColor]"></div></div>
+                            </div>
+                            <div>
+                                <div class="mb-1 flex justify-between"><span>Response</span></div>
+                                <div class="h-1 bg-gray-800 rounded-full overflow-hidden shadow-inner"><div id="sim-response-bar" class="h-full bg-blue-500 w-[50%] transition-all duration-500 shadow-[0_0_10px_currentColor]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Initial Loading State -->
+                    <div id="gauge-loading" class="absolute inset-0 flex items-center justify-center text-white text-xs uppercase tracking-widest font-bold pointer-events-none opacity-0 transition-opacity duration-500">
                         Initializing Engine...
                     </div>
                 </div>
@@ -139,12 +179,12 @@ get_header();
         }
     </script>
 
-    <!-- 3D Gauge Script - Load only if width > 768px -->
+    <!-- 3D Tuning Visualizer Script - Load only if width > 768px -->
     <script>
         if (window.innerWidth >= 768) {
             const script = document.createElement('script');
             script.type = 'module';
-            script.src = '<?php echo get_template_directory_uri(); ?>/assets/js/gauge-3d.js?ver=<?php echo time(); ?>';
+            script.src = '<?php echo get_template_directory_uri(); ?>/assets/js/tuning-visualizer.js?ver=<?php echo time(); ?>';
             document.body.appendChild(script);
         }
     </script>

@@ -167,6 +167,7 @@ Allow: /wp-content/uploads/
 
 # Sitemap
 Sitemap: " . home_url('/sitemap_index.xml') . "
+Sitemap: " . home_url('/ctr_sitemap.xml') . "
 ";
     return $output . $rules;
 }
@@ -360,6 +361,10 @@ function tuning_mania_auto_setup_pages() {
             'title'    => 'Contact Us',
             'template' => 'page.php',
             'content'  => '<!-- Contact Form Placeholder -->'
+        ),
+        'sitemap' => array(
+            'title'    => 'Sitemap',
+            'template' => 'page-templates/html-sitemap.php'
         )
     );
 

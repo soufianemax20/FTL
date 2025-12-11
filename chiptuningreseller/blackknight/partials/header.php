@@ -1,13 +1,12 @@
-<!-- <script src="https://cdn.tailwindcss.com"></script> -->
-<div class="main-header ctr-relative ctr-pt-5 ctr-bg-[url('https://chiptuningreseller.com/wp-content/uploads/2024/01/ChipTuning-Reseller-Page-Header-Black-Night.jpg')] ctr-bg-cover ctr-px-4 ctr-pb-8 ctr-bg-no-repeat ctr-bg-top ctr-bg-fixed">
+<div class="main-header ctr-relative ctr-pt-24 ctr-px-4 ctr-pb-8">
         <?php if (!isset($engine)) { ?>
             <div>
-                <h1 id="ctr-page-title" class="ctr-text-white ctr-text-center ctr-text-[40px] ctr-pt-40 ctr-pb-24"></h1>
+                <h1 id="ctr-page-title" class="ctr-text-white ctr-text-center ctr-text-[40px] ctr-pt-10 ctr-pb-10"></h1>
             </div>
         <?php }
         if (isset($engine)) { ?>
             <div>
-                <h1 id="ctr-stage-title" class="ctr-text-white ctr-text-center ctr-pt-28 ctr-pb-6"></h1>
+                <h1 id="ctr-stage-title" class="ctr-text-white ctr-text-center ctr-pt-10 ctr-pb-6"></h1>
             </div>
         <?php } ?>
         <div>

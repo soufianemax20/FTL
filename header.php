@@ -270,7 +270,8 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 z-[1001] md:hidden overflow-y-auto bg-[#030303]">
+         class="fixed inset-0 z-[1001] md:hidden overflow-y-auto bg-[#030303]"
+         style="display: none;">
 
         <!-- Animated Background (Fixed position to stay while scrolling) -->
         <div class="fixed inset-0 pointer-events-none">
